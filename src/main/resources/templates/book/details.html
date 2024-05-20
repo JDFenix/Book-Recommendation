@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${book.name}"></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <style>
+        .book-image {
+            max-width: 340px;
+            max-height: 450px;
+        }
+
+        .card {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light mb-5">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/book/showAll}">
+            <i class="fas fa-book book-icon"></i>Age Of Books
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a th:if="${user.role == T(com.example.system_inventory_product.entity.user.Role).administrator}"
+                       class="nav-link" th:href="@{/author/registerForm}">Autores</a>
+                </li>
+                <li th:if="${user.role == T(com.example.system_inventory_product.entity.user.Role).administrator}"
+                    class="nav-item">
+                    <a class="nav-link" th:href="@{/category/createForm}">Categorias</a>
+                </li>
+                <li th:if="${user.role == T(com.example.system_inventory_product.entity.user.Role).administrator}"
+                    class="nav-item">
+                    <a class="nav-link" th:href="@{/book/createForm}">Registrar Libros</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img th:src="${user.avatar}" alt="Avatar" class="avatar" th:text="${user.username}">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/auth/logout">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container">
+    <div class="card">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img th:src="${book.image}" alt="Book Image" class="card-img book-image">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${book.name}"></h5>
+                    <p class="card-text">
+                        <small class="text-muted" th:text="${bookDetails.publisherDate}"></small>
+                        <span
+                                th:text="' | ' + ${bookDetails.publisher} + ' | Genero ' + ${book.category.name} + ' | Author ' +${book.author.name} +' '+ ${book.author.surname}">
+                        </span>
+                    </p>
+                    <p class="card-text" th:text="${bookDetails.description}"></p>
+                    <p class="card-text">
+                        <span th:text="${bookDetails.retailPrice}"></span>
+                        <span th:text="${bookDetails.currencyCode}"></span>
+                    </p>
+                    <a th:href="${bookDetails.buyLink}" class="btn btn-primary">Comprar ahora</a>
+                    <div th:if="${user.role == T(com.example.system_inventory_product.entity.user.Role).administrator}" class="btn-group">
+                    <a th:href="@{'/book/updateForm/'+${book.id}}" class="btn btn-secondary">Editar datos</a>
+                    <a th:href="@{'/book/delete/'+ ${book.id} } " class="btn btn-danger"><i
+                            class="fas fa-trash-alt"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
