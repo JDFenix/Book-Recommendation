@@ -1,11 +1,14 @@
 package com.example.system_inventory_product.repository.user;
 
+import com.example.system_inventory_product.dto.user.UserDto;
 import com.example.system_inventory_product.entity.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface IUserRepository extends JpaRepository<User,Long> {
 
-    User findUserByEmail(String email);
+    Optional<User> findUserByEmail(String email);
 }

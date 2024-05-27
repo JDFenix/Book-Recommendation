@@ -1,12 +1,12 @@
 package com.example.system_inventory_product.dto.user;
 
 import com.example.system_inventory_product.entity.user.Role;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserDto {
     private String avatar;
     private String username;

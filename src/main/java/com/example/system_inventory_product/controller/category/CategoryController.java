@@ -19,15 +19,15 @@ public class CategoryController {
     private CategoryService categoryService;
 
 
-    @GetMapping("/createForm")
-    public String showCreateForm(Model model, HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("authenticatedUser");
-        List<CategoryDto> allCategory = categoryService.findAll();
-        model.addAttribute("allCategory", allCategory);
-        model.addAttribute("user", user);
-        model.addAttribute("categoryDto", new CategoryDto());
-        return "/category/create";
-    }
+//    @GetMapping("/createForm")
+//    public String showCreateForm(Model model, HttpServletRequest request) {
+//        User user = (User) request.getSession().getAttribute("authenticatedUser");
+//        List<CategoryDto> allCategory = categoryService.getAllCategories();
+//        model.addAttribute("allCategory", allCategory);
+//        model.addAttribute("user", user);
+//        model.addAttribute("categoryDto", new CategoryDto());
+//        return "/category/create";
+//    }
 
     @PostMapping("/create")
     public String createCategory(@ModelAttribute CategoryDto categoryDto) {

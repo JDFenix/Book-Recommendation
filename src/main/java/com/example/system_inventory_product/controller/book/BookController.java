@@ -33,33 +33,33 @@ public class BookController {
     private ICategoryRepository iCategoryRepository;
 
 
-    @GetMapping("/showAll")
-    public String homeBook(Model model, HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("authenticatedUser");
-        List<Book> books = bookService.getAllBooks();
-        model.addAttribute("user", user);
-        model.addAttribute("books", books);
-        return "book/show";
-    }
+//    @GetMapping("/showAll")
+//    public String homeBook(Model model, HttpServletRequest request) {
+//        User user = (User) request.getSession().getAttribute("authenticatedUser");
+//        List<Book> books = bookService.getAllBooks();
+//        model.addAttribute("user", user);
+//        model.addAttribute("books", books);
+//        return "book/show";
+//    }
 
 
-    @GetMapping("/details/{bookId}")
-    public String showBookDetails(@PathVariable Long bookId, HttpServletRequest request, Model model) {
-
-        try {
-            User user = (User) request.getSession().getAttribute("authenticatedUser");
-            Book book = bookService.getBookById(bookId);
-            BookDetailsDto bookDetails = bookService.getDetailsBook(book);
-
-            model.addAttribute("book", book);
-            model.addAttribute("bookDetails", bookDetails);
-            model.addAttribute("user", user);
-            return "book/details";
-        } catch (InternalError e) {
-            model.addAttribute("error", new InternalError(e));
-            return "error";
-        }
-    }
+//    @GetMapping("/details/{bookId}")
+//    public String showBookDetails(@PathVariable Long bookId, HttpServletRequest request, Model model) {
+//
+//        try {
+//            User user = (User) request.getSession().getAttribute("authenticatedUser");
+//            Book book = bookService.getBookById(bookId);
+//            BookDetailsDto bookDetails = bookService.getDetailsBook(book);
+//
+//            model.addAttribute("book", book);
+//            model.addAttribute("bookDetails", bookDetails);
+//            model.addAttribute("user", user);
+//            return "book/details";
+//        } catch (InternalError e) {
+//            model.addAttribute("error", new InternalError(e));
+//            return "error";
+//        }
+//    }
 
     @GetMapping("/delete/{bookId}")
     public String destroy(@PathVariable Long bookId) {
@@ -71,27 +71,27 @@ public class BookController {
         return "redirect:/book/showAll";
     }
 
-    @GetMapping("/updateForm/{bookId}")
-    public String showForm(@PathVariable Long bookId, Model model, HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("authenticatedUser");
-        Book book = bookService.getBookById(bookId);
-        List<Author> authors = iAuthorRepository.findAll();
-        List<Category> categories = iCategoryRepository.findAll();
-
-        BookDto bookDto = new BookDto();
-        bookDto.setId(book.getId());
-        bookDto.setName(book.getName());
-        bookDto.setImage(book.getImage());
-        bookDto.setAuthor(book.getAuthor());
-        bookDto.setCategory(book.getCategory());
-
-        model.addAttribute("book", book);
-        model.addAttribute("authors", authors);
-        model.addAttribute("categories", categories);
-        model.addAttribute("bookDto", bookDto);
-        model.addAttribute("user", user);
-        return "book/update";
-    }
+//    @GetMapping("/updateForm/{bookId}")
+//    public String showForm(@PathVariable Long bookId, Model model, HttpServletRequest request) {
+//        User user = (User) request.getSession().getAttribute("authenticatedUser");
+//        Book book = bookService.getBookById(bookId);
+//        List<Author> authors = iAuthorRepository.findAll();
+//        List<Category> categories = iCategoryRepository.findAll();
+//
+//        BookDto bookDto = new BookDto();
+//        bookDto.setId(book.getId());
+//        bookDto.setName(book.getName());
+//        bookDto.setImage(book.getImage());
+//        bookDto.setAuthor(book.getAuthor());
+//        bookDto.setCategory(book.getCategory());
+//
+//        model.addAttribute("book", book);
+//        model.addAttribute("authors", authors);
+//        model.addAttribute("categories", categories);
+//        model.addAttribute("bookDto", bookDto);
+//        model.addAttribute("user", user);
+//        return "book/update";
+//    }
 
     @PostMapping("/update")
     public String update(@ModelAttribute("bookDto") BookDto bookDto) {
