@@ -2,6 +2,7 @@ package com.example.system_inventory_product.service.user;
 
 import com.example.system_inventory_product.api.AvatarApi;
 import com.example.system_inventory_product.controller.api.StandardResponse;
+import com.example.system_inventory_product.dto.auth.AuthenticationRequest;
 import com.example.system_inventory_product.dto.user.UserDto;
 import com.example.system_inventory_product.entity.user.User;
 import com.example.system_inventory_product.exception.ResourceNotFoundException;
@@ -11,6 +12,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -88,5 +90,10 @@ public class UserService {
 
     private User convertToEntity(UserDto userDto) {
         return new User(userDto.getUsername(), userDto.getEmail(), userDto.getPassword(), userDto.getRole());
+    }
+
+    public User findUserByUsername(AuthenticationRequest authRequest) {
+        return iUserRepository.findByUsername(authRequest.getUsername())
+                .orElseThrow(()->new ResourceNotFoundException("usuario no encontrado"));
     }
 }

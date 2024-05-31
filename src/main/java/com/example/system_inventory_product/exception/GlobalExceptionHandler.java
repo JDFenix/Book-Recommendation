@@ -47,4 +47,6 @@ public class GlobalExceptionHandler {
         StandardResponse response = new StandardResponse("Error interno del servidor: " + ex.getMessage(), "Error inesperado");
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }
+
+
 }

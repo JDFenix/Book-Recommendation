@@ -1,6 +1,6 @@
 package com.example.system_inventory_product.dto.user;
 
-import com.example.system_inventory_product.entity.user.Role;
+import com.example.system_inventory_product.util.Role;
 import lombok.*;
 
 

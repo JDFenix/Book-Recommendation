@@ -1,6 +1,6 @@
 package com.example.system_inventory_product.initializer.user;
 
-import com.example.system_inventory_product.entity.user.Role;
+import com.example.system_inventory_product.util.Role;
 import com.example.system_inventory_product.entity.user.User;
 import com.example.system_inventory_product.repository.user.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
